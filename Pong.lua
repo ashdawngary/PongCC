@@ -148,7 +148,7 @@ function playGame()
 		end
 		if (math.floor(ballx) == 4) then
 			-- check if bounced.
-			if ((math.floor(bally) > paddle1) and (math.floor(bally) < (paddle1+5) ) then 
+			if ((math.floor(bally) > paddle1) and (math.floor(bally) < (paddle1+5) )) then 
 			 -- p1 just bounced.
 			 velx = 1
 			 vely = (math.random() * 2)-1
@@ -158,7 +158,7 @@ function playGame()
 		
 		if (math.floor(ballx) == width-4) then
 			-- check if bounced.
-			if ((math.floor(bally) > paddle2) and (math.floor(bally) < (paddle2+5)) then
+			if ((math.floor(bally) > paddle2) and (math.floor(bally) < (paddle2+5))) then
 			 -- p1 just bounced.
 			 velx = -1
 			 vely = (math.random() * 2)-1
@@ -170,8 +170,8 @@ function playGame()
 		
 		
 		paddle2 = paddle2 +(bally - (paddle2+1)) / (math.abs(bally -(paddle2+1))) -- Computer AI DONT TOUCH.
-		ballx += velx
-		bally += vely
+		ballx = ballx + velx
+		bally = bally + vely
 		sleep(0.01)
 		advapi.updateScreen(instance,mst,mstc,msb)
 	end
