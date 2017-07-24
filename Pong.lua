@@ -35,9 +35,9 @@ function TitleScreenAnimation()
 	end
 end
 function drawScreen(p1,p2,bx,by)
-	local length,width
+	local width,length = instance.getSize()
 	mst,mstc,msb,msbu = advapi.drawRect(instance,mst,mstc,msb,msbu,1,p1,3,p1+5,colors.white,false)
-	mst,mstc,msb,msbu = advapi.drawRect(instance,mst,mstc,msb,msbu,length -3, p2, length, p2 + 5, colors.yellow,false)
+	mst,mstc,msb,msbu = advapi.drawRect(instance,mst,mstc,msb,msbu,width -3, p2, width, p2 + 5, colors.yellow,false)
 	
 	
 	return mst,mstc,msb,msbu
@@ -76,24 +76,24 @@ function CoinFlipBackground()
 	mst,mstc,msb,msbu = advapi.createScreen(instance)
 	paddle1 = 1
 	paddle2 = 1
-	target_paddle1 = math.random(1,70)
-	target_paddle2 = math.random(1,70)
+	target_paddle1 = math.random(1,20)
+	target_paddle2 = math.random(1,20)
 	while true do
 	mst,mstc,msb,msbu = advapi.createScreen(instance)
 		drawScreen(paddle1,paddle2,0,0) -- no ball yet.
 		if (paddle1  == target_paddle1) then -- extremely slick way to animate kek.
 			target_paddle1 = math.random(1,70)
 		else
-			paddle1 = paddle1 +  (target_paddle1 - paddle1) / (abs(target_paddle1-paddle1))
+			paddle1 = paddle1 +  (target_paddle1 - paddle1) / (math.abs(target_paddle1-paddle1))
 		end
 		if (paddle2  == target_paddle2) then -- extremely slick way to animate kek.
 			target_paddle2 = math.random(1,70)
 		else
-			paddle2 =  paddle2 +(target_paddle2 - paddle2) / (abs(target_paddle2-paddle2))
+			paddle2 =  paddle2 +(target_paddle2 - paddle2) / (math.abs(target_paddle2-paddle2))
 		end
 		mst,mstc,msb,msbu = advapi.drawRect(instance,mst,mstc,msb,msbu,43,14,47,18,colors.orange,false)
 		advapi.updateScreen(instance,mst,mstc,msb)
-		sleep(0.2) -- Solid 5fps.
+		sleep(0.1) -- Solid 5fps.
 	end
 end
 parallel.waitForAny(waitforstart,drawTitleScreen)
