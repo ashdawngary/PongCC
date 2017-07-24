@@ -42,7 +42,7 @@ function drawScreen(p1,p2,bx,by)
 	local width,length = instance.getSize()
 	mst,mstc,msb,msbu = advapi.drawRect(instance,mst,mstc,msb,msbu,1,p1,3,p1+5,colors.white,false)
 	mst,mstc,msb,msbu = advapi.drawRect(instance,mst,mstc,msb,msbu,width -3, p2, width, p2 + 5, colors.yellow,false)
-	
+	mst,mstc,msb,msbu = advapi.writePixel(instance,mst,mstc,msb,msbu,bx,by,false,colors.red,false) -- draws 1 pixel of red at (bx,by)
 	
 	return mst,mstc,msb,msbu
 end
@@ -106,13 +106,13 @@ function CoinFlipBackground()
 	end
 end
 function renderCoinFilp()
-	turns = math.random(1,20)
+	turns = math.random(10,20)
 	
 	for f =0,turns do
 		mst,mstc,msb,msbu = advapi.createScreen(instance)
 		drawScreen(paddle1,paddle2,0,0) -- no ball yet.
 		mst,mstc,msb,msbu = advapi.drawRect(instance,mst,mstc,msb,msbu,43,14,47,18,colors.orange,false)
-		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,45,16,toString(f % 2),colors.black,colors.orange)
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,45,16,tostring(f % 2),colors.black,colors.orange)
 		advapi.updateScreen(instance,mst,mstc,msb)
 		sleep(0.2)
 	end
@@ -127,12 +127,65 @@ function renderCoinFilp()
 	vely = (math.random() * 2)-1
 	print("CoinFlip Done.")
 end
+function clickHandler()
+	local event, side, x, y = os.pullEvent("monitor_touch")
+	if (y < 16) then
+	paddle1 = math.max(paddle1-1,0)
+	else
+	paddle1 = math.min(paddle1+1,28)
+	end
+end
+function playGame()
+	while ((ballx > 2) and (ballx < 80) ) do
+		local width,length = instance.getSize()
+		drawScreen(paddle1,paddle2,math.floor(ballx),math.floor(bally))
+		
+		if (bally  < 2) then
+			vely = (math.random() * 1)
+		end		
+		if (bally > 32) then
+			vely = (math.random() * -1)
+		end
+		if (math.floor(ballx) == 4) then
+			-- check if bounced.
+			if ((math.floor(bally) > paddle1) and (math.floor(bally) < (paddle1+5) ) then 
+			 -- p1 just bounced.
+			 velx = 1
+			 vely = (math.random() * 2)-1
+			end
+			
+		end
+		
+		if (math.floor(ballx) == width-4) then
+			-- check if bounced.
+			if ((math.floor(bally) > paddle2) and (math.floor(bally) < (paddle2+5)) then
+			 -- p1 just bounced.
+			 velx = -1
+			 vely = (math.random() * 2)-1
+			 
+			end
+		end
+		
+		
+		
+		
+		paddle2 = paddle2 +(bally - (paddle2+1)) / (math.abs(bally -(paddle2+1))) -- Computer AI DONT TOUCH.
+		ballx += velx
+		bally += vely
+		sleep(0.01)
+		advapi.updateScreen(instance,mst,mstc,msb)
+	end
+
+
+
+end
+
 parallel.waitForAny(waitforstart,drawTitleScreen)
 TitleScreenAnimation()
 print("Passed Title Screen! Loading Code.")
 parallel.waitForAny(coinFlipStart,CoinFlipBackground)
 renderCoinFilp()
 while true do
-	
+parallel.waitForAny(clickHandler,playGame)	
 
 end
