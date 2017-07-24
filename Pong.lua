@@ -58,7 +58,7 @@ function waitforstart()
 	
 	
 end
-function coinFlipstart()
+function coinFlipStart()
 	while true do -- Detect Coin Hit.
 	
 	local event, side, x, y = os.pullEvent("monitor_touch")
@@ -76,20 +76,20 @@ function CoinFlipBackground()
 	mst,mstc,msb,msbu = advapi.createScreen(instance)
 	paddle1 = 1
 	paddle2 = 1
-	target_paddle1 = random.randint(1,70)
-	target_paddle2 = random.randint(1,70)
+	target_paddle1 = math.random(1,70)
+	target_paddle2 = math.random(1,70)
 	while true do
 	mst,mstc,msb,msbu = advapi.createScreen(instance)
 		drawScreen(paddle1,paddle2,0,0) -- no ball yet.
 		if (paddle1  == target_paddle1) then -- extremely slick way to animate kek.
-			target_paddle1 = random.randint(1,70)
+			target_paddle1 = math.random(1,70)
 		else
-			paddle1 += (target_paddle1 - paddle1) / (abs(target_paddle1-paddle1))
+			paddle1 = paddle1 +  (target_paddle1 - paddle1) / (abs(target_paddle1-paddle1))
 		end
 		if (paddle2  == target_paddle2) then -- extremely slick way to animate kek.
-			target_paddle2 = random.randint(1,70)
+			target_paddle2 = math.random(1,70)
 		else
-			paddle2 += (target_paddle2 - paddle2) / (abs(target_paddle2-paddle2))
+			paddle2 =  paddle2 +(target_paddle2 - paddle2) / (abs(target_paddle2-paddle2))
 		end
 		mst,mstc,msb,msbu = advapi.drawRect(instance,mst,mstc,msb,msbu,43,14,47,18,colors.orange,false)
 		advapi.updateScreen(instance,mst,mstc,msb)
