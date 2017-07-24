@@ -191,7 +191,7 @@ function playGame()
 		paddle2 = paddle2 +(bally - (paddle2+1)) / (math.abs(bally -(paddle2+1))) -- Computer AI DONT TOUCH.
 		ballx = ballx + velx
 		bally = bally + vely
-		sleep(0.01)
+		sleep(0.1)
 		advapi.updateScreen(instance,mst,mstc,msb)
 	end
 
@@ -206,5 +206,9 @@ parallel.waitForAny(coinFlipStart,CoinFlipBackground)
 renderCoinFilp()
 while true do
 parallel.waitForAny(clickHandler,playGame)	
-
+print("Downtime.")
+sleep(3)
+print("Re-Entering game / Resetting ")
+ballx = 41
+bally = 16
 end
