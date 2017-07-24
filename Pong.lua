@@ -12,6 +12,8 @@ print(instance.getSize())
 mst,mstc,msb,msbu = advapi.createScreen(instance)
 paddle1 = 1
 paddle2 = 1
+ballx = -1
+bally = -1
 function dist(x1,y1,x2,y2)
 	return math.sqrt(math.abs(x1-x2)^2 + math.abs(y2-y1)^2)
 end
@@ -39,6 +41,20 @@ function TitleScreenAnimation()
 	end
 end
 function drawScreen(p1,p2,bx,by)
+	if (bx ==nil) then
+		print("SOFTERROR: drawscreen recieved a nil ballX");
+		return -1
+	else if (by = nil) then
+		print("SOFTERROR: drawscreen recieved a nil ballY");
+		return -1
+	else if (p1 = nil) then
+		print("SOFTERROR: drawscreen recieved a nil paddle(P1)");
+		return -1
+	else if (p2 = nil) then
+		print("SOFTERROR: drawscreen recieved a nil paddle(P2)");
+		return -1
+	end
+	
 	local width,length = instance.getSize()
 	mst,mstc,msb,msbu = advapi.drawRect(instance,mst,mstc,msb,msbu,1,p1,3,p1+5,colors.white,false)
 	mst,mstc,msb,msbu = advapi.drawRect(instance,mst,mstc,msb,msbu,width -3, p2, width, p2 + 5, colors.yellow,false)
