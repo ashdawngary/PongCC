@@ -194,7 +194,11 @@ function playGame()
 		sleep(0.1)
 		advapi.updateScreen(instance,mst,mstc,msb)
 	end
-
+	print("Downtime.")
+	sleep(3)
+	print("Re-Entering game / Resetting ")
+	ballx = 41
+	bally = 16
 
 
 end
@@ -206,9 +210,5 @@ parallel.waitForAny(coinFlipStart,CoinFlipBackground)
 renderCoinFilp()
 while true do
 parallel.waitForAny(clickHandler,playGame)	
-print("Downtime.")
-sleep(3)
-print("Re-Entering game / Resetting ")
-ballx = 41
-bally = 16
+
 end
