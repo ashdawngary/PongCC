@@ -9,6 +9,7 @@ if (instance == nil) then
 	return 404
 end
 print(instance.getSize())
+length,width = instance.getSize()
 mst,mstc,msb,msbu = advapi.createScreen(instance)
 paddle1 = 1
 paddle2 = 1
