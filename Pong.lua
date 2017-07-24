@@ -9,7 +9,7 @@ mst,mstc,msb,msbu = advapi.createScreen(instance)
 paddle1 = 1
 paddle2 = 1
 function dist(x1,y1,x2,y2)
-	return sqrt(abs(x1-x2)^2 + abs(y2-y1)^2)
+	return math.sqrt(math.abs(x1-x2)^2 + math.abs(y2-y1)^2)
 end
 function drawTitleScreen()
 	while true do
