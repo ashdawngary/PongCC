@@ -78,22 +78,27 @@ function CoinFlipBackground()
 	paddle2 = 1
 	target_paddle1 = math.random(1,20)
 	target_paddle2 = math.random(1,20)
+	text = {colors.red,colors.red,colors.lightBlue,colors.lightBlue,colors.yellow,colors.yellow,colors.orange,colors.orange}
+	frame = 0
 	while true do
+		print("Rendering Frame #"..frame)
 	mst,mstc,msb,msbu = advapi.createScreen(instance)
 		drawScreen(paddle1,paddle2,0,0) -- no ball yet.
 		if (paddle1  == target_paddle1) then -- extremely slick way to animate kek.
-			target_paddle1 = math.random(1,70)
+			target_paddle1 = math.random(1,20)
 		else
 			paddle1 = paddle1 +  (target_paddle1 - paddle1) / (math.abs(target_paddle1-paddle1))
 		end
 		if (paddle2  == target_paddle2) then -- extremely slick way to animate kek.
-			target_paddle2 = math.random(1,70)
+			target_paddle2 = math.random(1,20)
 		else
 			paddle2 =  paddle2 +(target_paddle2 - paddle2) / (math.abs(target_paddle2-paddle2))
 		end
 		mst,mstc,msb,msbu = advapi.drawRect(instance,mst,mstc,msb,msbu,43,14,47,18,colors.orange,false)
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,30,10,"Click on the Coin to CoinFlip!",text[(frame % 8)+1],colors.black)
 		advapi.updateScreen(instance,mst,mstc,msb)
-		sleep(0.1) -- Solid 5fps.
+		frame += 1
+		sleep(0.1) -- Solid 10fps.
 	end
 end
 parallel.waitForAny(waitforstart,drawTitleScreen)
