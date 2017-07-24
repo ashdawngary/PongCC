@@ -103,7 +103,7 @@ function CoinFlipBackground()
 	frame = 0
 	while true do
 		print("Rendering Frame #"..frame)
-	mst,mstc,msb,msbu = advapi.createScreen(instance)
+		mst,mstc,msb,msbu = advapi.createScreen(instance)
 		drawScreen(paddle1,paddle2,0,0) -- no ball yet.
 		if (paddle1  == target_paddle1) then -- extremely slick way to animate kek.
 			target_paddle1 = math.random(1,20)
@@ -153,7 +153,9 @@ function clickHandler()
 	end
 end
 function playGame()
+	
 	while ((ballx > 2) and (ballx < 80) ) do
+	mst,mstc,msb,msbu = advapi.createScreen(instance)	
 		local width,length = instance.getSize()
 		drawScreen(paddle1,paddle2,math.floor(ballx),math.floor(bally))
 		
