@@ -6,11 +6,14 @@ mst,mstc,msb,msbu = advapi.createScreen(instance)
 paddle1 = 1
 paddle2 = 1
 function drawTitleScreen()
-	mst,mstc,msb,msbu = advapi.drawRect(instance,mst,mstc,msb,msbu,5,5,20,10,colors.white,false)
-	mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,10,7,"START",colors.green,colors.white)
-	mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,1,1,"Pong By IntelX",colors.blue,colors.black)
-	mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,10,20,"Click the White Button to Start!",colors.blue,colors.black)
-	advapi.updateScreen(instance,mst,mstc,msb)
+	while true do
+		mst,mstc,msb,msbu = advapi.drawRect(instance,mst,mstc,msb,msbu,5,5,20,10,colors.white,false)
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,10,7,"START",colors.green,colors.white)
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,1,1,"Pong By IntelX",colors.blue,colors.black)
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,10,20,"Click the White Button to Start!",colors.blue,colors.black)
+		advapi.updateScreen(instance,mst,mstc,msb)
+		sleep(0.2) -- throw a 5ps update OP
+	end
 end
 function TitleScreenAnimation()
 	for offset = 0,30 do
@@ -20,11 +23,9 @@ function TitleScreenAnimation()
 		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,1-offset,1,"Pong By IntelX",colors.yellow,colors.black)
 		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,10-offset,20,"Loading ...",colors.blue,colors.black)
 		advapi.updateScreen(instance,mst,mstc,msb)
-		sleep(0.03)
+		sleep(0.03) -- Got that lit 30FPS o.o
 		
 	end
-
-
 end
 function drawScreen(p1,p2,bx,by)
 	local length,width
