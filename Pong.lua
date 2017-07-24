@@ -44,13 +44,13 @@ function drawScreen(p1,p2,bx,by)
 	if (bx ==nil) then
 		print("SOFTERROR: drawscreen recieved a nil ballX");
 		return -1
-	else if (by = nil) then
+	elseif (by == nil) then
 		print("SOFTERROR: drawscreen recieved a nil ballY");
 		return -1
-	else if (p1 = nil) then
+	elseif (p1 == nil) then
 		print("SOFTERROR: drawscreen recieved a nil paddle(P1)");
 		return -1
-	else if (p2 = nil) then
+	elseif (p2 == nil) then
 		print("SOFTERROR: drawscreen recieved a nil paddle(P2)");
 		return -1
 	end
