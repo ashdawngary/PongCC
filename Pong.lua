@@ -3,7 +3,11 @@
 os.loadAPI("advapi")
 
 
-instance = advapi.getMonitorInstance("monitor_5")
+instance = peripheral.find("monitor")
+if (instance == nil)
+	print("SoftError - No Monitor Hooked up.")
+	return 404
+end
 print(instance.getSize())
 mst,mstc,msb,msbu = advapi.createScreen(instance)
 paddle1 = 1
@@ -97,14 +101,20 @@ function CoinFlipBackground()
 		mst,mstc,msb,msbu = advapi.drawRect(instance,mst,mstc,msb,msbu,43,14,47,18,colors.orange,false)
 		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,30,10,"Click on the Coin to CoinFlip!",text[(frame % 8)+1],colors.black)
 		advapi.updateScreen(instance,mst,mstc,msb)
-		frame += 1
+		frame = frame + 1
 		sleep(0.1) -- Solid 10fps.
 	end
+end
+function renderCoinFilp()
+
+
+
 end
 parallel.waitForAny(waitforstart,drawTitleScreen)
 TitleScreenAnimation()
 print("Passed Title Screen! Loading Code.")
 parallel.waitForAny(coinFlipStart,CoinFlipBackground)
+renderCoinFilp()
 while true do
 	
 
