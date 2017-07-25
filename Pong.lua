@@ -158,7 +158,7 @@ function playGame()
 		mst,mstc,msb,msbu = advapi.createScreen(instance)	
 		local width,length = instance.getSize()
 		
-		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,39,1,PongColors[(PROGRAM_FRAME % 5 )+ 1],colors.black,,"P")
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,39,1,PongColors[(PROGRAM_FRAME % 5 )+ 1],colors.black,"P")
 		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,40,1,PongColors[((PROGRAM_FRAME+1) % 5 )+ 1],colors.black,"o")
 		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,41,1,PongColors[((PROGRAM_FRAME+2) % 5 )+ 1],colors.black,"n")
 		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,42,1,PongColors[((PROGRAM_FRAME+3) % 5 )+ 1],colors.black,"g")
@@ -207,15 +207,15 @@ function playGame()
 		ballx = ballx + velx
 		bally = bally + vely
 		sleep(0.1)
-		PROGRAM_FRAME += 1
-		TAPS += 1
+		PROGRAM_FRAME = PROGRAM_FRAME + 1
+		TAPS = TAPS + 1
 		advapi.updateScreen(instance,mst,mstc,msb)
 	end
 	print("Downtime.")
 	if (ballx < 2) then
-	COMSCORE += TAPS / 10
+	COMSCORE = COMSCORE + TAPS / 10
 	else
-	PLAYERSCORE += TAPS/10
+	PLAYERSCORE = PLAYERSCORE + TAPS/10
 	end
 	TAPS = 1
 	sleep(3)
