@@ -146,7 +146,7 @@ function renderCoinFilp()
 end
 function clickHandler()
 	local event, side, x, y = os.pullEvent("monitor_touch")
-	if (y < 16) then
+	if (y < paddle1) then
 	paddle1 = math.max(paddle1-1,0)
 	else
 	paddle1 = math.min(paddle1+1,28)
@@ -155,10 +155,25 @@ end
 function playGame()
 	
 	while ((ballx > 2) and (ballx < 80) ) do
-	mst,mstc,msb,msbu = advapi.createScreen(instance)	
+		mst,mstc,msb,msbu = advapi.createScreen(instance)	
 		local width,length = instance.getSize()
-		drawScreen(paddle1,paddle2,math.floor(ballx),math.floor(bally))
 		
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,39,1,PongColors[(PROGRAM_FRAME % 5 )+ 1],colors.black,,"P")
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,40,1,PongColors[((PROGRAM_FRAME+1) % 5 )+ 1],colors.black,"o")
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,41,1,PongColors[((PROGRAM_FRAME+2) % 5 )+ 1],colors.black,"n")
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,42,1,PongColors[((PROGRAM_FRAME+3) % 5 )+ 1],colors.black,"g")
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,43,1,PongColors[((PROGRAM_FRAME+4) % 5 )+ 1],colors.black,"!")
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,39,2,IntelColors[   (PROGRAM_FRAME % 5 )+ 1],colors.black,"I")
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,40,2,IntelColors[((PROGRAM_FRAME+1) % 5 )+ 1],colors.black,"n")
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,41,2,IntelColors[((PROGRAM_FRAME+2) % 5 )+ 1],colors.black,"t")
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,42,2,IntelColors[((PROGRAM_FRAME+3) % 5 )+ 1],colors.black,"e")
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,43,2,IntelColors[((PROGRAM_FRAME+4) % 5 )+ 1],colors.black,"l")
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,43,2,IntelColors[((PROGRAM_FRAME+5) % 5 )+ 1],colors.black,"X")
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,39,4,colors.red,colors.black,"Match Point Worth"..(TAPS/10))
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,10,30,colors.white,colors.black,"Your Score"..PLAYERSCORE);
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,60,30,colors.yellow,colors.black,"Com Score"..COMSCORE);
+
+		drawScreen(paddle1,paddle2,math.floor(ballx),math.floor(bally))
 		if (bally  < 2) then
 			vely = (math.random() * 1)
 		end		
@@ -188,13 +203,21 @@ function playGame()
 		
 		
 		
-		paddle2 = paddle2 +(bally - (paddle2+1)) / (math.abs(bally -(paddle2+1))) -- Computer AI DONT TOUCH.
+		paddle2 = paddle2 +(bally - (paddle2+3)) / (math.abs(bally -(paddle2+3))) -- Computer AI DONT TOUCH.
 		ballx = ballx + velx
 		bally = bally + vely
 		sleep(0.1)
+		PROGRAM_FRAME += 1
+		TAPS += 1
 		advapi.updateScreen(instance,mst,mstc,msb)
 	end
 	print("Downtime.")
+	if (ballx < 2) then
+	COMSCORE += TAPS / 10
+	else
+	PLAYERSCORE += TAPS/10
+	end
+	TAPS = 1
 	sleep(3)
 	print("Re-Entering game / Resetting ")
 	ballx = 41
@@ -208,6 +231,12 @@ TitleScreenAnimation()
 print("Passed Title Screen! Loading Code.")
 parallel.waitForAny(coinFlipStart,CoinFlipBackground)
 renderCoinFilp()
+PROGRAM_FRAME = 0
+PongColors = {colors.red,colors.orange,colors.yellow,colors.green,colors.blue}
+IntelColors = {colors.lightBlue,colors.white,colors.blue,colors.white,colors.lightBlue}
+PLAYERSCORE = 0
+COMSCORE = 0
+TAPS = 0
 while true do
 parallel.waitForAny(clickHandler,playGame)	
 
