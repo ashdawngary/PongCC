@@ -158,21 +158,21 @@ function playGame()
 		mst,mstc,msb,msbu = advapi.createScreen(instance)	
 		local width,length = instance.getSize()
 		
-		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,39,1,PongColors[(PROGRAM_FRAME % 5 )+ 1],colors.black,"P")
-		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,40,1,PongColors[((PROGRAM_FRAME+1) % 5 )+ 1],colors.black,"o")
-		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,41,1,PongColors[((PROGRAM_FRAME+2) % 5 )+ 1],colors.black,"n")
-		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,42,1,PongColors[((PROGRAM_FRAME+3) % 5 )+ 1],colors.black,"g")
-		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,43,1,PongColors[((PROGRAM_FRAME+4) % 5 )+ 1],colors.black,"!")
-		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,39,2,IntelColors[   (PROGRAM_FRAME % 5 )+ 1],colors.black,"I")
-		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,40,2,IntelColors[((PROGRAM_FRAME+1) % 5 )+ 1],colors.black,"n")
-		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,41,2,IntelColors[((PROGRAM_FRAME+2) % 5 )+ 1],colors.black,"t")
-		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,42,2,IntelColors[((PROGRAM_FRAME+3) % 5 )+ 1],colors.black,"e")
-		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,43,2,IntelColors[((PROGRAM_FRAME+4) % 5 )+ 1],colors.black,"l")
-		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,43,2,IntelColors[((PROGRAM_FRAME+5) % 5 )+ 1],colors.black,"X")
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,39,1,"P",PongColors[(PROGRAM_FRAME % 5 )+ 1],colors.black)
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,40,1,"o",PongColors[((PROGRAM_FRAME+1) % 5 )+ 1],colors.black)
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,41,1,"n",PongColors[((PROGRAM_FRAME+2) % 5 )+ 1],colors.black)
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,42,1,"g",PongColors[((PROGRAM_FRAME+3) % 5 )+ 1],colors.black)
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,43,1,"!",PongColors[((PROGRAM_FRAME+4) % 5 )+ 1],colors.black)
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,39,2,"I",IntelColors[   (PROGRAM_FRAME % 5 )+ 1],colors.black)
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,40,2,"n",IntelColors[((PROGRAM_FRAME+1) % 5 )+ 1],colors.black)
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,41,2,"t",IntelColors[((PROGRAM_FRAME+2) % 5 )+ 1],colors.black)
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,42,2,"e",IntelColors[((PROGRAM_FRAME+3) % 5 )+ 1],colors.black)
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,43,2,"l",IntelColors[((PROGRAM_FRAME+4) % 5 )+ 1],colors.black)
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,43,2,"X",IntelColors[((PROGRAM_FRAME+5) % 5 )+ 1],colors.black)
 		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,39,4,colors.red,colors.black,"Match Point Worth"..(TAPS/10))
 		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,10,30,colors.white,colors.black,"Your Score"..PLAYERSCORE);
 		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,60,30,colors.yellow,colors.black,"Com Score"..COMSCORE);
-
+		print msb[2]
 		drawScreen(paddle1,paddle2,math.floor(ballx),math.floor(bally))
 		if (bally  < 2) then
 			vely = (math.random() * 1)
