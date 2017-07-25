@@ -168,11 +168,10 @@ function playGame()
 		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,41,2,"t",IntelColors[((PROGRAM_FRAME+2) % 5 )+ 1],colors.black)
 		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,42,2,"e",IntelColors[((PROGRAM_FRAME+3) % 5 )+ 1],colors.black)
 		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,43,2,"l",IntelColors[((PROGRAM_FRAME+4) % 5 )+ 1],colors.black)
-		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,43,2,"X",IntelColors[((PROGRAM_FRAME+5) % 5 )+ 1],colors.black)
+		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,43,3,"X",IntelColors[((PROGRAM_FRAME+5) % 5 )+ 1],colors.black)
 		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,39,4,"Match Point Worth"..(TAPS/10),colors.red,colors.black)
 		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,10,30,"Your Score"..PLAYERSCORE,colors.white,colors.black);
 		mst,mstc,msb,msbu = advapi.writeText(instance,mst,mstc,msb,msbu,60,30,"Com Score"..COMSCORE,colors.yellow,colors.black);
-		--print msb[2]
 		drawScreen(paddle1,paddle2,math.floor(ballx),math.floor(bally))
 		if (bally  < 2) then
 			vely = (math.random() * 1)
@@ -212,7 +211,7 @@ function playGame()
 		advapi.updateScreen(instance,mst,mstc,msb)
 	end
 	print("Downtime.")
-	if (ballx < 2) then
+	if (ballx < 40) then
 	COMSCORE = COMSCORE + TAPS / 10
 	else
 	PLAYERSCORE = PLAYERSCORE + TAPS/10
